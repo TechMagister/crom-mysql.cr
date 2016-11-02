@@ -52,8 +52,11 @@ describe CROM::MySQL::Adapter do
 
   it "should delete an object" do
     tm = User.new(name: "Toto", age: 15)
-    user = users.insert(tm)
-    users.delete user.not_nil!
-    users.fetch(user.not_nil!.id).should be_nil
+    if user = users.insert(tm)
+      old_id = user.id
+      users.delete user
+      user.id.should be_nil
+      users.fetch(old_id).should be_nil
+    end
   end
 end

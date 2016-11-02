@@ -5,13 +5,8 @@ require "./crom-mysql/*"
 module CROM
   macro mysql_adapter(properties, strict = true)
 
-    # @see crystal-db : /src/db/mapping.cr
-    def self.from_rs(%rs : ::DB::ResultSet)
-      %objs = Array(self).new
-      %rs.each do
-        %objs << self.new(%rs)
-      end
-      %objs
+    def after_delete()
+      @id = nil
     end
 
     def self.new_from_rs(%rs : ::MySql::ResultSet)
@@ -19,6 +14,15 @@ module CROM
       instance = self.allocate
       instance.initialize(%rs)
       instance
+    end
+
+    # @see crystal-db : /src/db/mapping.cr
+    def self.from_rs(%rs : ::DB::ResultSet)
+      %objs = Array(self).new
+      %rs.each do
+        %objs << self.new(%rs)
+      end
+      %objs
     end
 
     def initialize(%rs : ::MySql::ResultSet)
