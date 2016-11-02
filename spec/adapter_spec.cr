@@ -23,40 +23,36 @@ describe CROM::MySQL::Adapter do
   end
 
   it "should create an object" do
-    tm = User.new(name: "Toto", age: 15)
-    user = users.insert(tm)
-    user.should_not be_nil
-    if u = user
-      u.name.should eq("Toto")
-      u.id.should_not be_nil
-      u.age.should eq(15)
-    end
+    user = User.new(name: "Toto", age: 15)
+    users.insert(user)
+
+    user.id.should_not be_nil
   end
 
   it "should update an object" do
-    tmp = User.new(name: "Toto", age: 15)
-    if user = users.insert(tmp)
-      user.name = "Toto2"
-      users.update user
+    user = User.new(name: "Toto", age: 15)
+    users.insert(user)
+    
+    user.name = "Toto2"
+    users.update user
 
-      updated_user = users.fetch(user.id)
-      updated_user.should_not be_nil
+    updated_user = users.fetch(user.id)
+    updated_user.should_not be_nil
 
-      if uu = updated_user
-        uu.name.should eq("Toto2")
-        uu.id.should eq(user.id)
-        uu.age.should eq(user.age)
-      end
+    if uu = updated_user
+      uu.name.should eq("Toto2")
+      uu.id.should eq(user.id)
+      uu.age.should eq(user.age)
     end
   end
 
   it "should delete an object" do
-    tm = User.new(name: "Toto", age: 15)
-    if user = users.insert(tm)
-      old_id = user.id
-      users.delete user
-      user.id.should be_nil
-      users.fetch(old_id).should be_nil
-    end
+    user = User.new(name: "Toto", age: 15)
+    users.insert(user)
+    
+    old_id = user.id
+    users.delete user
+    user.id.should be_nil
+    users.fetch(old_id).should be_nil
   end
 end

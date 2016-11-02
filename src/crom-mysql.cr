@@ -5,9 +5,7 @@ require "./crom-mysql/*"
 module CROM
   macro mysql_adapter(properties, strict = true)
 
-    def after_delete()
-      @id = nil
-    end
+    include CROM::MySQL::Events
 
     def self.new_from_rs(%rs : ::MySql::ResultSet)
       return nil unless %rs.move_next

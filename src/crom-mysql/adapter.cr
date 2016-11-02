@@ -18,7 +18,7 @@ module CROM::MySQL
         stmt << ");"
       end
       ret = with_db { exec statement, args }
-      return fetch(model, ret.last_insert_id)
+      return ret.last_insert_id
     end
 
     def update(model, namedtuple)
@@ -33,6 +33,7 @@ module CROM::MySQL
         stmt << " WHERE id=?"
       end
       with_db {exec statement, args }
+      fetch(model, namedtuple[:id])
     end
 
     def delete(model, namedtuple)
