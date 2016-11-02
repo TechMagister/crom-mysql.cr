@@ -1,9 +1,6 @@
 module CROM::MySQL
   class Adapter < CROM::Adapter
-    @db : DB::Database
-
     def initialize(@uri : URI, **options)
-      @db = DB.open @uri
     end
 
     def insert(model, namedtuple)
@@ -28,6 +25,11 @@ module CROM::MySQL
     end
 
     def delete(model, namedtuple)
+      statement = String.build do |stmt|
+        stmt << "DELETE FROM #{model.dataset} "
+        stmt << "WHERE id=?"
+      end
+      with_db { exec statement, namedtuple[:id] }
     end
 
     def fetch(model, criteria)
@@ -39,12 +41,12 @@ module CROM::MySQL
           stmt << " WHERE id=? LIMIT 1"
         end
         ret = with_db { query statement, criteria }
-        return model.new ret
+        return model.new_from_rs ret
       end
     end
 
     private def with_db(&block)
-      with @db yield
+      with DB.open(@uri) yield
     end
 
     private def sql_type_for(v)

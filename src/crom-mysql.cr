@@ -14,13 +14,18 @@ module CROM
       %objs
     end
 
-    def initialize(%rs : ::DB::ResultSet)
+    def self.new_from_rs(%rs : ::MySql::ResultSet)
+      return nil unless %rs.move_next
+      instance = self.allocate
+      instance.initialize(%rs)
+      instance
+    end
+
+    def initialize(%rs : ::MySql::ResultSet)
       {% for key, value in properties %}
         %var{key.id} = nil
         %found{key.id} = false
       {% end %}
-
-      %rs.move_next
 
       %rs.each_column do |col_name|
         case col_name

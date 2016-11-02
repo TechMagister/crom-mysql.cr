@@ -2,6 +2,15 @@
 
 MySQL adapter for CRystal Object Mapper
 
+WIP
+
+## Features
+[ ] Create table
+[x] Insert Basic Object
+[ ] Update Basic Object
+[x] Delete Basic Object
+[x] Fetch by Id
+
 ## Installation
 
 
@@ -41,8 +50,6 @@ user.id
 
 ```
 
-
-TODO: Write usage instructions here
 
 ## Development
 

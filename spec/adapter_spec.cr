@@ -22,7 +22,7 @@ describe CROM::MySQL::Adapter do
     tm.age.should eq(10)
   end
 
-  it "should create user" do
+  it "should create the object" do
     tm = User.new(name: "Toto", age: 15)
     user = users.insert(tm)
     user.should_not be_nil
@@ -31,5 +31,12 @@ describe CROM::MySQL::Adapter do
       u.id.should_not be_nil
       u.age.should eq(15)
     end
+  end
+
+  it "should delete an object" do
+    tm = User.new(name: "Toto", age: 15)
+    user = users.insert(tm)
+    users.delete user.not_nil!
+    users.fetch(user.not_nil!.id).should be_nil
   end
 end
