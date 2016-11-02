@@ -5,3 +5,7 @@ authors:
   - Arnaud Fernandés <arnaud.fernandes@laposte.net>
 
 license: MIT
+
+dependencies:
+  crom:
+    git: ../../crom.cr
