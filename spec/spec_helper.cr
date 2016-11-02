@@ -1,2 +1,2 @@
 require "spec"
-require "../src/crom_mysql"
+require "../src/crom-mysql"

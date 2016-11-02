@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe CromMysql do
+describe CROM::MySQL do
   # TODO: Write tests
 
   it "works" do
