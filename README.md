@@ -1,6 +1,6 @@
 # crom-mysql
 
-TODO: Write a description here
+MySQL adapter for CRystal Object Mapper
 
 ## Installation
 
@@ -19,6 +19,26 @@ dependencies:
 
 ```crystal
 require "crom-mysql"
+
+class User
+  CROM.mapping(:mysql, {
+    id:   {type: Int64, nilable: true},
+    name: String,
+    age:  Int32,
+  })
+end
+
+class Users < CROM::Repository(User)
+end
+
+crom = CROM.container("mysql://root@localhost/crom_spec")
+
+users = Users.new crom
+
+user = User.new(name: "Toto", age: 15)
+user = users.insert(user)
+user.id
+
 ```
 
 
