@@ -7,7 +7,7 @@ WIP
 ## Features
 [ ] Create table
 [x] Insert Basic Object
-[ ] Update Basic Object
+[x] Update Basic Object
 [x] Delete Basic Object
 [x] Fetch by Id
 

@@ -22,6 +22,17 @@ module CROM::MySQL
     end
 
     def update(model, namedtuple)
+      args = [] of DB::Any
+      namedtuple.each { |key, val| args << val unless key == :id }
+      args << namedtuple[:id]
+      sql_fields = namedtuple.keys.map { |key| "#{key}=?" unless key == :id }.to_a.compact.join(",")
+
+      statement = String.build do |stmt|
+        stmt << "UPDATE #{model.dataset} SET "
+        stmt << sql_fields
+        stmt << " WHERE id=?"
+      end
+      with_db {exec statement, args }
     end
 
     def delete(model, namedtuple)
