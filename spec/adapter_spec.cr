@@ -8,14 +8,14 @@ class User
   })
 end
 
-class Users < CROM::Repository(User)
+class Users < CROM::MySQL::Repository(User)
 end
 
 crom = CROM.container("mysql://root@localhost/crom_spec")
 
 users = Users.new crom
 
-describe CROM::MySQL::Adapter do
+describe CROM::MySQL::Gateway do
   it "should create mapping" do
     tm = User.new(name: "Toto", age: 10)
     tm.name.should eq("Toto")
@@ -32,11 +32,10 @@ describe CROM::MySQL::Adapter do
   it "should update an object" do
     user = User.new(name: "Toto", age: 15)
     users.insert(user)
-    
     user.name = "Toto2"
     users.update user
 
-    updated_user = users.fetch(user.id)
+    updated_user = users[user.id]
     updated_user.should_not be_nil
 
     if uu = updated_user
@@ -49,10 +48,9 @@ describe CROM::MySQL::Adapter do
   it "should delete an object" do
     user = User.new(name: "Toto", age: 15)
     users.insert(user)
-    
     old_id = user.id
     users.delete user
     user.id.should be_nil
-    users.fetch(old_id).should be_nil
+    users[old_id].should be_nil
   end
 end
