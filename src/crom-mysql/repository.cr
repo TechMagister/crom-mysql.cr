@@ -47,5 +47,19 @@ module CROM::MySQL
       T.new_from_rs ret
     end
 
+    def all
+      stmt = builder.get_all
+      ret = gateway.query stmt
+      T.from_rs ret
+    end
+
+    def delete_all
+      gateway.exec "DELETE FROM #{T.dataset}"
+    end
+
+    def count
+      gateway.count T.dataset
+    end
+
   end
 end

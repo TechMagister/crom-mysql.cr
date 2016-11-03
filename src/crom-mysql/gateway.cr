@@ -20,6 +20,14 @@ module CROM::MySQL
       with_db { query statement }
     end
 
+    def exec(statement)
+      with_db { exec statement }
+    end
+
+    def count(dataset)
+      with_db { scalar "SELECT COUNT(*) FROM #{dataset}" }
+    end
+
     private def with_db(&block)
       with DB.open(@uri) yield
     end
