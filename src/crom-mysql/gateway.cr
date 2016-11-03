@@ -1,3 +1,5 @@
+require "crom"
+
 module CROM::MySQL
   class Gateway < CROM::Gateway
     def initialize(@uri : URI, **options)
@@ -24,6 +26,7 @@ module CROM::MySQL
       with_db { exec statement }
     end
 
+    # execute the query : "SELECT COUNT(*) FROM #{dataset}"
     def count(dataset)
       with_db { scalar "SELECT COUNT(*) FROM #{dataset}" }
     end

@@ -37,7 +37,7 @@ class User
   })
 end
 
-class Users < CROM::Repository(User)
+class Users < CROM::MySQL::Repository(User)
 end
 
 crom = CROM.container("mysql://root@localhost/crom_spec")
@@ -46,7 +46,7 @@ users = Users.new crom
 
 user = User.new(name: "Toto", age: 15)
 user = users.insert(user)
-user.id
+id = user.id # not nil
 
 ```
 
