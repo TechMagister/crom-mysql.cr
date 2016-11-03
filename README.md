@@ -4,8 +4,9 @@ MySQL adapter for CRystal Object Mapper
 
 WIP
 
+Warning: It does not create the table, for such work use an other tool like [micrate](https://github.com/juanedi/micrate)
+
 ## Features
-[ ] Create table
 [x] Insert Basic Object
 [x] Update Basic Object
 [x] Delete Basic Object
@@ -25,6 +26,7 @@ dependencies:
 
 ## Usage
 
+Because it's a WIP, see spec for more details.
 
 ```crystal
 require "crom-mysql"

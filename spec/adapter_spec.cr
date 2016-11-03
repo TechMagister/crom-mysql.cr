@@ -1,5 +1,12 @@
 require "./spec_helper"
 
+# create statement : 
+# CREATE TABLE `user` (
+#   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+#   `name` varchar(255) DEFAULT NULL,
+#   `age` int(11) DEFAULT NULL,
+#   PRIMARY KEY (`id`)
+# )
 class User
   CROM.mapping(:mysql, {
     id:   {type: Int64, nilable: true},
