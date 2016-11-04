@@ -11,6 +11,7 @@ Warning: It does not create the table, for such work use an other tool like [mic
 [x] Update Basic Object
 [x] Delete Basic Object
 [x] Fetch by Id
+[x] Aggregation support
 
 ## Installation
 
