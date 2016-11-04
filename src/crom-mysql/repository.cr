@@ -2,6 +2,7 @@ require "query-builder"
 
 module CROM::MySQL
   class Repository(T) < CROM::Repository(T)
+
     private def gateway
       container.gateway
     end
@@ -11,9 +12,20 @@ module CROM::MySQL
       b.table(T.dataset)
     end
 
-    def do_insert(model : T)
+    private def prepare_data(model : T)
       data = model.to_crom.to_h
       data.delete :id
+
+      data.each do |key, value|
+        if value.responds_to? :id
+          data[key] = value.id
+        end
+      end
+      data
+    end
+
+    def do_insert(model : T)
+      data = prepare_data(model)
 
       req = builder.insert(data)
       ret = gateway.insert( statement: req )
