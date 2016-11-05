@@ -7,11 +7,11 @@ WIP
 Warning: It does not create the table, for such work use an other tool like [micrate](https://github.com/juanedi/micrate)
 
 ## Features
-[x] Insert Basic Object
-[x] Update Basic Object
-[x] Delete Basic Object
-[x] Fetch by Id
-[x] Aggregation support
+- [x] Insert Basic Object
+- [x] Update Basic Object
+- [x] Delete Basic Object
+- [x] Fetch by Id
+- [x] Aggregation support
 
 ## Installation
 
