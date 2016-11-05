@@ -36,8 +36,7 @@ module CROM::MySQL
     end
 
     def do_update(model : T)
-      data = model.to_crom.to_h
-      data.delete :id
+      data = prepare_data(model)
 
       req = builder.where("id", model.id).update(data)
       ret = gateway.update( statement: req )
