@@ -56,7 +56,31 @@ id = user.id # not nil
 
 ## Development
 
-TODO: Write development instructions here
+To run spec, you should create a database named crom_spec and configure the URI in spec_helper.cr
+```crystal
+DB_URI = "mysql://root@localhost/crom_spec"
+```
+
+Create the following tables :
+```sql
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+CREATE TABLE `book` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `author_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+CREATE TABLE `author` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+```
 
 ## Contributing
 

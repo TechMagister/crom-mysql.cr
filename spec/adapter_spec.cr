@@ -18,7 +18,7 @@ end
 class Users < CROM::MySQL::Repository(User)
 end
 
-crom = CROM.container("mysql://root@localhost/crom_spec")
+crom = CROM.container(DB_URI)
 
 users = Users.new crom
 

@@ -64,7 +64,7 @@ class Authors < CROM::MySQL::Repository(Author)
 end
 
 
-crom = CROM.container("mysql://root@localhost/crom_spec")
+crom = CROM.container(DB_URI)
 CROM.register_repository :books, Books.new crom 
 CROM.register_repository :authors, Authors.new crom
 
